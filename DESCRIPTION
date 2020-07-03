@@ -1,0 +1,47 @@
+Package: PixhawkPlanner
+Type: Package
+Title: Pixhawk UAV Mission Planner
+Version: 0.1.0
+Date: 2020-07-01
+Authors@R: c(person("Chris", "Reudenbach", email = "reudenbach@uni-marburg.de", role = c("cre", "aut")),
+             person("Marvin", "Ludwig", role = c("ctb")),
+             person("Hanna", "Meyer", role = c("ctb"))
+             )
+Encoding: UTF-8
+Maintainer: Chris Reudenbach <reudenbach@uni-marburg.de>
+Description: The Pixhawk Unmanned Aerial Vehicle Mission Planner provides an easy to use work flow for planning autonomous obstacle avoiding surveys of (almost) ready to fly unmanned aerial vehicles to retrieve aerial or spot related data. It creates MAVlink protocol conform flight control files for the pixhawk flightcontroller family. Additionally it contains some useful tools for digitizing and data manipulation.
+URL: https://github.com/gisma/PixhawkPlanner
+BugReports: https://github.com/gisma/PixhawkPlanner/issues
+LazyData: TRUE
+License: GPL (>= 3) | file LICENSE
+Depends:
+    R (>= 3.1.0)
+Imports:
+    sp,
+    sf,    
+    raster,
+    rgdal,
+    rgeos,
+    geosphere,
+    tools,
+    log4r,
+    zoo,
+    data.table,
+    methods,
+    brew,
+    exifr,
+    link2GI,
+    jsonlite,
+    rlist,
+    rlang
+RoxygenNote: 7.1.0
+SystemRequirements: GNU make
+Suggests: knitr,
+    rmarkdown,
+    mapview,
+    grDevices,
+    stringr,
+    htmltools,
+    htmlwidgets,
+    maptools
+VignetteBuilder: knitr
