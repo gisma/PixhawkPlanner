@@ -3,13 +3,7 @@
 
 
 
-# Unmanned Aerial Vehicle R  Tools
-The `uavR` tools consist of two packages:
-
-  * mission planning ```PixhawkPlanner``` ([CRAN](https://CRAN.R-project.org/package=uavRmp))
-  * remote sensing toolbox ```uavRst```   ([CRAN](https://CRAN.R-project.org/package=uavRst))
-
-## Unmanned Aerial Vehicle R based Mission Planning - PixhawkPlanner 
+# Unmanned Aerial Vehicle R based Mission Planning - PixhawkPlanner 
 The [PixhawkPlanner](https://github.com/gisma/PixhawkPlanner) package is designed 
 for uav autonomous mission planning. In the first place it is a simple and open source planning tool for monitoring flights of low budget drones based on ```R```. It provide an easy workflow for planning autonomous 
 surveys including battery-dependent task splitting, save departures, and approaches of each monitoring chunks. It belongs to the ```uavR``` package family that provides more functionality for the pre- and post-processing as well as the analysis of the derived data.
