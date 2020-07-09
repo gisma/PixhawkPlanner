@@ -15,3 +15,24 @@ data.frame of image positions and travel distance
 \description{
 extract all and returns specific exif information from a list of images
 }
+\details{
+extracts the spatio-temporal information found in the exif data of images in the directory specified in path.
+    The function also calculates the time and distance between two consecutive images.
+}
+\examples{
+\dontrun{
+
+
+imgPath = "/path/to/image/directory/"
+
+# get exif information from all images of a flight task
+imgs = extractExifr(path = imgPath)
+
+# convert to spatial and visualize
+imgs = sf::st_as_sf(imgs, coords = c("GPSLongitude", "GPSLatitude", "GPSAltitude"), crs = 4326)
+mapview::mapview(imgs)
+
+}
+
+
+}

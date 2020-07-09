@@ -4,14 +4,12 @@
 \alias{minBB}
 \title{Rectangle flight area around points}
 \usage{
-minBB(points, buffer = 0, epsg = 25832)
+minBB(points, buffer = 0)
 }
 \arguments{
 \item{points}{a sf object, points you want to fly over}
 
 \item{buffer}{buffer distance between the points and the rectangle; defaults 0}
-
-\item{epsg}{reference system}
 }
 \value{
 SpatialPoints: Corners of the flight area
@@ -20,7 +18,23 @@ SpatialPoints: Corners of the flight area
 Creates optimal rectangle area around points
 }
 \details{
-The code is based on a Rotating Caliper Algorithm and mostly copy and pasted (see reference)
+Creates a bounding box with optimal angles around points. This bounding box can then be used as a survey area for the flight task planning.
+    The code is based on a Rotating Caliper Algorithm and mostly copy and pasted (see reference)
+}
+\examples{
+\dontrun{
+
+df = data.frame(x = c(493043, 493046, 492871), 
+                y = c(5638795, 5638893, 5638817),
+                label = c("P1", "P2", "P3"))
+p = sf::st_as_sf(df, coords = c("x", "y"), crs = 25832) 
+
+bb = minBB(p, buffer = 20)
+plot(bb)
+}
+
+
+
 }
 \references{
 http://dwoll.de/rexrepos/posts/diagBounding.html

@@ -3,16 +3,13 @@
 
 surveyArea = "/home/marvin/casestudies/uas_flight_wolfskaute/fp/initial_planning.plan"
 
-useMP = function(surveyArea, uavViewDir = 0, followSurfaceRes = 1, followSurface = TRUE)
-
-
-
-
-t <- jsonlite::fromJSON(surveyArea)
-listPos <- grep("command", t$mission$items$TransectStyleComplexItem$Items)
-tmp<- t$mission$items$TransectStyleComplexItem$Items[listPos][[1]]
-#length(tmp$params[[60]])
-#tmp$params[[1]][5:6]
+useMP = function(surveyArea, uavViewDir = 0, followSurfaceRes = 1, followSurface = TRUE){
+  
+  t <- jsonlite::fromJSON(surveyArea)
+  listPos <- grep("command", t$mission$items$TransectStyleComplexItem$Items)
+  tmp<- t$mission$items$TransectStyleComplexItem$Items[listPos][[1]]
+  #length(tmp$params[[60]])
+  #tmp$params[[1]][5:6]
   coord<-tmp[tmp["command"]==16, ]
   #coord$params
   df_coordinates<-t(as.data.frame(rlist::list.cbind(coord[,"params",])))[,5:6]
@@ -29,8 +26,8 @@ tmp<- t$mission$items$TransectStyleComplexItem$Items[listPos][[1]]
   updir           <- t$mission$items$angle[listPos]
   if (updir <= 180) {
     downdir <- updir + 180
-    }else if (updir>180) {
-      downdir<- updir -180}
+  }else if (updir>180) {
+    downdir<- updir -180}
   
   
   
@@ -97,8 +94,12 @@ tmp<- t$mission$items$TransectStyleComplexItem$Items[listPos][[1]]
   
   
   # calculates the footprint of the first position and returns a SpatialPolygonsDataFrame
-  if (picFootprint)  camera <- calcCamFoot(pos[1], pos[2], uavViewDir, trackDistance, flightAltitude, 0, 0)
-  else  camera = "NULL"
+  if (picFootprint){
+    camera <- calcCamFoot(pos[1], pos[2], uavViewDir, trackDistance, flightAltitude, 0, 0)
+  }else{
+    camera = "NULL"
+  }
+  
   
   ## creates the export control parameter set of the first position
   if (uavType == "pixhawk") {
@@ -114,17 +115,11 @@ tmp<- t$mission$items$TransectStyleComplexItem$Items[listPos][[1]]
     }
     trackDistance <- len
     multiply <- 1
-  }
-  
-  ## set counter and params for mode = "waypoints"
-  else if (mode == "waypoints") {
+  } else if (mode == "waypoints") {
     if (uavType == "pixhawk") {
       lns[length(lns) + 1] <- makeUavPointMAV(lat = pos[2],lon = pos[1],head = uavViewDir,group = 99)
     }
-  }
-  
-  ## set counter and params for mode = "terrainTrack"
-  else if (mode == "terrainTrack") group = 99
+  }else if (mode == "terrainTrack") group = 99
   df_coord<-as.data.frame(df_coordinates)
   names(df_coord)<-c("lat","lon")
   for (j in seq(1:(nrow(df_coord)-1))) {
@@ -163,3 +158,11 @@ tmp<- t$mission$items$TransectStyleComplexItem$Items[listPos][[1]]
     utils::setTxtProgressBar(pb, j)
   }
   close(pb)    
+  
+  
+  
+}
+
+
+
+
