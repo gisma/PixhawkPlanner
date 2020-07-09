@@ -4,23 +4,39 @@
 #'
 #' @param points a sf object, points you want to fly over
 #' @param buffer buffer distance between the points and the rectangle; defaults 0
-#' @param epsg reference system
 #'
 #' @return SpatialPoints: Corners of the flight area
 #'
 #' @author Marvin Ludwig
 #'
-#' @details The code is based on a Rotating Caliper Algorithm and mostly copy and pasted (see reference)
+#' @details Creates a bounding box with optimal angles around points. This bounding box can then be used as a survey area for the flight task planning.
+#'     The code is based on a Rotating Caliper Algorithm and mostly copy and pasted (see reference)
 #'
 #' @references http://dwoll.de/rexrepos/posts/diagBounding.html
 #'
 #' @export
+#' 
+#' @examples 
+#' \dontrun{
+#' 
+#' df = data.frame(x = c(493043, 493046, 492871), 
+#'                 y = c(5638795, 5638893, 5638817),
+#'                 label = c("P1", "P2", "P3"))
+#' p = sf::st_as_sf(df, coords = c("x", "y"), crs = 25832) 
+#' 
+#' bb = minBB(p, buffer = 20)
+#' plot(bb)
+#' }
+#' 
+#' 
+#' 
 
-minBB <- function(points, buffer = 0, epsg = 25832){
+minBB <- function(points, buffer = 0){
 
   # input and conversion
   #--------------------------
   xy <- do.call(rbind, sf::st_geometry(points))
+  epsg = sf::st_crs(points)
 
 
   # call the Rotating Caliper Algorithm
