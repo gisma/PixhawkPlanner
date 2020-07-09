@@ -1,4 +1,6 @@
-  
+# attempt at cleanup of the useMP function
+
+
 surveyArea = "/home/marvin/casestudies/uas_flight_wolfskaute/fp/initial_planning.plan"
 
 useMP = function(surveyArea, uavViewDir = 0, followSurfaceRes = 1, followSurface = TRUE)
